@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import "./homeStyle.css";
-import { GetVideosAction } from "../action";
+import { GetVideosAction, loadVideo } from "../action";
 import DisplayResult from "./DisplayResult";
+import { useDispatch, useSelector } from "react-redux";
 const HomeComp = () => {
   const [allVideos, setAllVideos] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const reduxState = useSelector((state) => state.LoadAllVidoes);
+  const dispatch = useDispatch();
   const GetVideosData = async () => {
     let { items } = await GetVideosAction();
     setAllVideos(items);
+    if (allVideos !== "") {
+      // we can use reduxState.items to get all the data inside api items object
+      dispatch({ type: "LOAD_VIDEO", data: { ...items } });
+    }
   };
   useEffect(() => {
     GetVideosData();
