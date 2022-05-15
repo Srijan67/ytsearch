@@ -1,0 +1,9 @@
+.result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  width: 90vw;
+  margin: auto;
+  margin-top: 2rem;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
